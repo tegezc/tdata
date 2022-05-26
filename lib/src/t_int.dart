@@ -2,9 +2,9 @@ const tDataIntDefaultValue = 0;
 
 class TInt {
   final int _realValue;
-  bool _isParseOk;
+  final bool _isSuccess;
 
-  TInt._int(this._realValue, this._isParseOk);
+  TInt._int(this._realValue, this._isSuccess);
 
   factory TInt._string(String strInt, {int? valueIfError}) {
     int? realValue = int.tryParse(strInt.trim());
@@ -31,11 +31,6 @@ class TInt {
     return TInt._string(strInt, valueIfError: valueIfError);
   }
 
-  factory TInt.fromDynamic(dynamic dValue, {int? valueIfError}) {
-    if (dValue.runtimeType == int) return TInt._int(dValue, true);
-    return TInt._string(dValue.toString(), valueIfError: valueIfError);
-  }
-
   int get realValue => _realValue;
-  bool get isParseOk => _isParseOk;
+  bool get isSuccess => _isSuccess;
 }
