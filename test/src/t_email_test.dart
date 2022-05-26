@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tdata/src/t_email.dart';
 
@@ -41,9 +40,6 @@ void main() {
 
   test('validate validEmail is valid email address', () {
     for (String email in validEmail) {
-      if (kDebugMode) {
-        print(email);
-      }
       final instance = TEmail.fromString(email);
       expect(instance.stringEmail, email);
       expect(instance.isValid, true);
@@ -52,9 +48,6 @@ void main() {
 
   test('validate invalidEmail is invalid email address', () {
     for (String email in invalidEmail) {
-      if (kDebugMode) {
-        print(email);
-      }
       final instance = TEmail.fromString(email);
       expect(instance.stringEmail, email);
       expect(instance.isValid, false);
