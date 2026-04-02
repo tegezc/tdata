@@ -2,14 +2,14 @@ import 'package:intl/intl.dart';
 import '../types/t_currency.dart';
 import 'currency_registry.dart';
 
-class CurrencyParser {
+class TCurrencyParser {
   static TCurrency parseInput(String? text,
       {required String currencyCode, double fallback = 0.0}) {
     if (text == null || text.trim().isEmpty) return TCurrency.safe(fallback);
 
     try {
       // 1. GET RULES FROM REGISTRY (Without if-else!)
-      final meta = CurrencyRegistry.getMeta(currencyCode);
+      final meta = TCurrencyRegistry.getMeta(currencyCode);
 
       final cleanText = text.replaceAll(RegExp(r'[^0-9,\.-]'), '');
 

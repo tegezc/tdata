@@ -1,7 +1,7 @@
 /// Record type to store currency metadata
 typedef CurrencyMeta = ({String locale, int decimals, String symbol});
 
-class CurrencyRegistry {
+class TCurrencyRegistry {
   /// Central currency data for your application
   static const Map<String, CurrencyMeta> _data = {
     'IDR': (locale: 'id_ID', decimals: 0, symbol: 'Rp '),

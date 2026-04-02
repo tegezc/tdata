@@ -66,7 +66,7 @@ extension type const TCurrency(double value) {
 
   /// Display currency format (e.g., "Rp 150.000" or "$ 1,500.50")
   String toDisplay(String currencyCode) {
-    final meta = CurrencyRegistry.getMeta(currencyCode);
+    final meta = TCurrencyRegistry.getMeta(currencyCode);
 
     final format = NumberFormat.currency(
       locale: meta.locale,
@@ -80,7 +80,7 @@ extension type const TCurrency(double value) {
 
   /// Display compact currency format (e.g., "Rp 1,5 jt" or "$ 1.5K")
   String toCompact(String currencyCode) {
-    final meta = CurrencyRegistry.getMeta(currencyCode);
+    final meta = TCurrencyRegistry.getMeta(currencyCode);
 
     final format = NumberFormat.compactCurrency(
       locale: meta.locale,
