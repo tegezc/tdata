@@ -1,9 +1,15 @@
 import 'dart:math' as math;
 
+import 'package:tdata/src/types/t_int.dart';
+
 /// Wrapper for [double] type with zero-cost abstraction.
 /// Designed with the "Strict on Parse, Safe on Operation" principle.
 extension type const TDouble(double value) {
+  /// Rounds TDouble to TInteger (e.g., 10.5 becomes 11)
+  TInteger roundToTInteger() => TInteger.safe(value.round());
 
+  /// Truncates TDouble decimals to TInteger (e.g., 10.9 becomes 10)
+  TInteger truncateToTInteger() => TInteger.safe(value.truncate());
   // ==========================================
   // 0. DEBUG HELPERS (REMOVED IN RELEASE)
   // ==========================================
@@ -27,7 +33,7 @@ extension type const TDouble(double value) {
       _debugFail('NaN detected in computation');
       return 0.0;
     } // Most safe fallback
-    if (v.isInfinite){
+    if (v.isInfinite) {
       _debugFail('Infinity detected in computation');
       return v.isNegative ? -double.maxFinite : double.maxFinite;
     }

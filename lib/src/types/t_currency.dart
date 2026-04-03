@@ -99,15 +99,16 @@ extension type const TCurrency(double value) {
       TCurrency(_safeGuard(value + other.value));
   TCurrency operator -(TCurrency other) =>
       TCurrency(_safeGuard(value - other.value));
-  TCurrency operator *(double multiplier) => TCurrency(_safeGuard(value *
-      multiplier)); // Currency multiplication is usually with a plain number, e.g., price * quantity
+  TCurrency operator *(num multiplier) {
+    return TCurrency(_safeGuard(value * multiplier.toDouble()));
+  } // Currency multiplication is usually with a plain number, e.g., price * quantity
 
-  TCurrency operator /(double divider) {
+  TCurrency operator /(num divider) {
     if (divider == 0) {
       _debugFail('Division by zero detected');
       return const TCurrency(0.0);
     }
-    return TCurrency(_safeGuard(value / divider));
+    return TCurrency(_safeGuard(value / divider.toDouble()));
   }
 
   bool operator >(TCurrency other) => value > other.value;
