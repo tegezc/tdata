@@ -10,5 +10,5 @@ class TIntegerConverter implements JsonConverter<TInteger, dynamic> {
   TInteger fromJson(dynamic json) => TInteger.fromJson(json);
 
   @override
-  dynamic toJson(TInteger object) => object.value;
+  dynamic toJson(TInteger object) => object.toJson();
 }

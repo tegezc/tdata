@@ -17,6 +17,6 @@ class TDoubleConverter implements JsonConverter<TDouble, dynamic> {
   @override
   dynamic toJson(TDouble object) {
     // Return the primitive double value when sending to Backend/Firebase
-    return object.value;
+    return object.toJson();
   }
 }

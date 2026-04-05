@@ -5,7 +5,6 @@ import '../utils/currency_registry.dart';
 /// Wrapper for the currency value.
 /// Zero-cost abstraction with support for multi-country formatting.
 extension type const TCurrency(double value) {
-
   // ==========================================
   // 0. DEBUG & GUARDS (Same as TDouble)
   // ==========================================
@@ -121,4 +120,10 @@ extension type const TCurrency(double value) {
   bool get isNegative => value < 0;
 
   TCurrency get abs => TCurrency(_safeGuard(value.abs()));
+
+  // ==========================================
+  // SERIALIZATION
+  // ==========================================
+  /// Returns primitive double value (not Rp string) for saving to database
+  double toJson() => value;
 }

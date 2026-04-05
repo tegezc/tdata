@@ -102,4 +102,10 @@ extension type const TInteger(int value) {
   TInteger get abs => TInteger(value.abs());
 
   String toDisplay() => value.toString();
+
+  // ==========================================
+  // SERIALIZATION
+  // ==========================================
+  /// Returns primitive integer value to save to database
+  int toJson() => value;
 }

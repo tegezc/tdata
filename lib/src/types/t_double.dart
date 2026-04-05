@@ -133,4 +133,10 @@ extension type const TDouble(double value) {
     final clamped = value.clamp(min.value, max.value);
     return TDouble(_safeGuard(clamped));
   }
+
+  // ==========================================
+  // SERIALIZATION
+  // ==========================================
+  /// Returns primitive value for JSON serialization purposes
+  double toJson() => value;
 }
