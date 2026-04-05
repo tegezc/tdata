@@ -58,7 +58,7 @@ extension type const TDouble(double value) {
         : double.tryParse(jsonValue.toString());
 
     if (parsed == null) {
-      throw FormatException('TDouble.fromJson: failed to parse "${jsonValue}"');
+      throw FormatException('TDouble.fromJson: failed to parse "$jsonValue"');
     }
 
     return TDouble(_strictGuard(parsed));
