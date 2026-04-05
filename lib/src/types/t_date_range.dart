@@ -1,7 +1,7 @@
 import 't_date_time.dart';
 
-/// Membungkus dua TDateTime (start dan end) untuk keperluan filter dan laporan.
-/// Sangat aman: Otomatis memperbaiki jika tanggal terbalik.
+/// Wraps two TDateTime (start and end) for filtering and reporting purposes.
+/// Very safe: Automatically fixes if dates are reversed.
 class TDateRange {
   final TDateTime start;
   final TDateTime end;
@@ -13,8 +13,7 @@ class TDateRange {
   // 1. CONSTRUCTORS & VALIDATION
   // ==========================================
 
-  /// Constructor pintar: Jika user/UI secara tidak sengaja memasukkan
-  /// tanggal awal yang lebih besar dari tanggal akhir, sistem akan OTOMATIS menukarnya.
+  /// Smart constructor: If user/UI accidentally enters start date greater than end date, system will AUTOMATICALLY swap them.
   factory TDateRange({required TDateTime start, required TDateTime end}) {
     if (start > end) {
       return TDateRange._(end, start);
@@ -30,32 +29,34 @@ class TDateRange {
       final end = TDateTime.fromJson(json['end']);
       return TDateRange(start: start, end: end);
     } catch (e) {
-      throw FormatException('TDateRange.fromJson: format tidak valid -> $e');
+      throw FormatException('TDateRange.fromJson: invalid format -> $e');
     }
   }
 
   // ==========================================
-  // 2. SMART PRESETS (Sangat berguna untuk UI Filter)
+  // 2. SMART PRESETS (Very useful for UI Filter)
   // ==========================================
 
-  /// Preset: Hari ini (00:00 sampai besok 00:00)
+  /// Preset: Today (00:00 to tomorrow 00:00)
   factory TDateRange.today() {
     final now = TDateTime.now();
     return TDateRange._(now.startOfDay, now.startOfNextDay);
   }
 
-  /// Preset: 7 Hari terakhir (termasuk hari ini)
+  /// Preset: Last 7 Days (including today)
   factory TDateRange.last7Days() {
     final now = TDateTime.now();
     final start = now.subtractDays(6).startOfDay;
     return TDateRange._(start, now.startOfNextDay);
   }
 
-  /// Preset: Bulan Ini (Tanggal 1 sampai awal bulan depan)
+  /// Preset: This Month (Date 1 to start of next month)
   factory TDateRange.thisMonth() {
     final localNow = DateTime.now().toLocal();
-    final startOfMonth = TDateTime.safe(DateTime(localNow.year, localNow.month, 1));
-    final startOfNextMonth = TDateTime.safe(DateTime(localNow.year, localNow.month + 1, 1));
+    final startOfMonth =
+        TDateTime.safe(DateTime(localNow.year, localNow.month, 1));
+    final startOfNextMonth =
+        TDateTime.safe(DateTime(localNow.year, localNow.month + 1, 1));
 
     return TDateRange._(startOfMonth, startOfNextMonth);
   }
@@ -64,14 +65,14 @@ class TDateRange {
   // 3. UTILITIES & LOGIC
   // ==========================================
 
-  /// Mengecek apakah sebuah tanggal (target) berada di dalam rentang ini
+  /// Check if a date (target) is within this range
   bool contains(TDateTime target) {
-    // Berlaku inklusif (>= start dan < end)
-    // Menggunakan logika '< end' karena end kita biasanya adalah startOfNextDay
+    // Inclusive range (>= start and < end)
+    // Using '< end' logic because end is usually startOfNextDay
     return (target >= start) && (target < end);
   }
 
-  /// Menghitung durasi rentang dalam hari
+  /// Calculate range duration in days
   int get durationInDays {
     return end.difference(start).inDays;
   }
@@ -80,17 +81,17 @@ class TDateRange {
   // 4. DISPLAY FORMATTING
   // ==========================================
 
-  /// Contoh output: "12 Okt 2025 - 15 Okt 2025"
-  /// Pintar: Jika bulan/tahun sama, bisa disingkat kelak
+  /// Example output: "12 Oct 2025 - 15 Oct 2025"
+  /// Smart: If month/year are the same, could be shortened later
   String toDisplay({String locale = 'id_ID'}) {
-    // Jika rentangnya cuma 1 hari, tampilkan 1 tanggal saja
+    // If range is only 1 day, display only 1 date
     if (durationInDays <= 1) {
       return start.toDisplayDate(locale: locale);
     }
 
-    // Karena 'end' adalah startOfNextDay (Jam 00:00 besoknya),
-    // Untuk keperluan display ke user, kita kurangi 1 hari agar masuk akal.
-    // Misal range (1 Okt - 2 Okt 00:00) ditampilkan sebagai "1 Okt 2025"
+    // Because 'end' is startOfNextDay (tomorrow at 00:00),
+    // For display purposes to user, we subtract 1 day to make sense.
+    // For example, range (1 Oct - 2 Oct 00:00) is displayed as "1 Oct 2025"
     final displayEnd = end.subtractDays(1);
 
     return '${start.toDisplayDate(locale: locale)} - ${displayEnd.toDisplayDate(locale: locale)}';
