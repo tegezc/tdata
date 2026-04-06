@@ -10,6 +10,7 @@ export 'src/types/t_email.dart';
 export 'src/types/t_phone_number.dart';
 export 'src/types/t_password.dart';
 export 'src/types/t_text.dart';
+export 'src/types/t_url.dart';
 
 // 2. Export Converters
 export 'src/converters/t_double_converter.dart';
@@ -20,6 +21,7 @@ export 'src/converters/t_date_range_converter.dart';
 export 'src/converters/t_email_converter.dart';
 export 'src/converters/t_phone_number_converter.dart';
 export 'src/converters/t_text_converter.dart';
+export 'src/converters/t_url_converter.dart';
 
 // 3. Utils
 export 'src/utils/currency_parser.dart';
