@@ -12,6 +12,7 @@ export 'src/types/t_password.dart';
 export 'src/types/t_text.dart';
 export 'src/types/t_url.dart';
 export 'src/types/t_percentage.dart';
+export 'src/types/t_category.dart';
 
 // 2. Export Converters
 export 'src/converters/t_double_converter.dart';
@@ -24,6 +25,7 @@ export 'src/converters/t_phone_number_converter.dart';
 export 'src/converters/t_text_converter.dart';
 export 'src/converters/t_url_converter.dart';
 export 'src/converters/t_percentage_converter.dart';
+export 'src/converters/t_category_converter.dart';
 
 // 3. Utils
 export 'src/utils/currency_parser.dart';
