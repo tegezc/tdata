@@ -27,7 +27,7 @@ void main() {
 
     test('calculate() calculates TCurrency deduction accurately', () {
       final hargaKopi = TCurrency(50000); // Rp 50.000
-      final ppn = TPercentage(11);        // Tax 11%
+      final ppn = TPercentage(11); // Tax 11%
 
       final nominalPajak = ppn.calculate(hargaKopi);
 
