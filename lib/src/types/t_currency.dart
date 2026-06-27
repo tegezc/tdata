@@ -2,8 +2,16 @@ import 'package:intl/intl.dart';
 
 import '../utils/currency_registry.dart';
 
-/// Wrapper for the currency value.
-/// Zero-cost abstraction with support for multi-country formatting.
+// Wrapper aman untuk nilai Mata Uang (Uang, Saldo, Harga, Tagihan).
+/// Menangani operasi matematika dengan aman dan menyediakan format UI otomatis.
+///
+/// [CURSOR AI HINT]:
+/// - STRICT RULE: NEVER use `double` or `int` for money. ALWAYS use `TCurrency`.
+/// - Math operations (+, -, *, /) are supported natively between TCurrency objects or with double.
+/// - To display the value in UI (Text widgets), ALWAYS call `.toDisplay(locale: 'id_ID')`.
+///   Do not manually format the raw value in the UI.
+/// - For UI Inputs (TextFields), parse user input using `CurrencyParser.parseInput(input)`.
+/// - For JSON serialization in Freezed, ALWAYS annotate the field with `@TCurrencyConverter()`.
 extension type const TCurrency(double value) {
   // ==========================================
   // 0. DEBUG & GUARDS (Same as TDouble)

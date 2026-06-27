@@ -1,7 +1,15 @@
 import 't_currency.dart';
 
-/// Wrapper for Percentage value.
-/// Internal value is always stored as the percentage number (Example: 11.5 for 11.5%).
+/// Wrapper untuk nilai Persentase (Pajak, Diskon, Split Bill).
+/// Menghilangkan ambiguitas antara desimal (0.11) dan persentase utuh (11%).
+///
+/// [CURSOR AI HINT]:
+/// - STRICT RULE: Use `TPercentage` for any tax, discount, or proportion fields.
+/// - The internal value is stored as the whole percentage (e.g., 11.5 for 11.5%).
+/// - MAGIC METHOD: To calculate the tax/discount amount from a price, ALWAYS use `.calculate(baseAmount)`.
+///   Example: `final taxAmount = TPercentage(11).calculate(TCurrency(50000));`
+/// - To display in UI (e.g., "11%"), ALWAYS use `.toDisplay()`.
+/// - For JSON serialization in Freezed, annotate the field with `@TPercentageConverter()`.
 extension type const TPercentage._(double value) {
   // ==========================================
   // 1. CONSTRUCTORS & PARSERS

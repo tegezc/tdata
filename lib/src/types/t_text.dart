@@ -1,5 +1,12 @@
-/// Wrapper for narrative text (Title, Note, Description).
-/// Ensures text is clean from double spaces, illegal characters, and length limits.
+/// Wrapper untuk teks narasi panjang (Judul, Catatan, Keterangan).
+/// Membersihkan spasi ganda, karakter aneh, dan membatasi panjang karakter.
+///
+/// [CURSOR AI HINT]:
+/// - STRICT RULE: Use `TText` instead of raw `String` for user-generated text inputs (like titles, descriptions, notes).
+/// - It automatically trims and removes double spaces (`sanitize: true`).
+/// - If creating a single-line title from a TextField, use `TText(input, singleLine: true, maxLength: 50)`.
+/// - For UI Display inside a constrained widget (like a Card), use `.toEllipsis(limit)` to prevent overflow.
+/// - For JSON serialization in Freezed, annotate the field with `@TTextConverter()`.
 extension type const TText._(String value) {
   // ==========================================
   // 1. CONSTRUCTORS

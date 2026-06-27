@@ -1,7 +1,15 @@
 import 't_date_time.dart';
 
-/// Wraps two TDateTime (start and end) for filtering and reporting purposes.
-/// Very safe: Automatically fixes if dates are reversed.
+/// Wrapper untuk rentang waktu (Start & End).
+/// Kebal terhadap input terbalik (start > end) dan sangat akurat untuk query database.
+///
+/// [CURSOR AI HINT]:
+/// - STRICT RULE: Use `TDateRange` for any date filtering or reporting periods.
+/// - It automatically swaps the dates if `start` is greater than `end`.
+/// - Use smart factories for UI Filters: `TDateRange.today()`, `TDateRange.last7Days()`, `TDateRange.thisMonth()`.
+/// - To check if a transaction falls within this range, use `.contains(transactionDate)`.
+/// - For UI Display, use `.toDisplay()`.
+/// - For JSON serialization in Freezed, annotate the field with `@TDateRangeConverter()`.
 class TDateRange {
   final TDateTime start;
   final TDateTime end;

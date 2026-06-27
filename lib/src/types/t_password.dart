@@ -1,8 +1,15 @@
 /// Enum for UI strength indicator (Example: Red, yellow, green bar)
 enum PasswordStrength { weak, medium, strong }
 
-/// Wrapper for password text.
-/// Designed for security, strength evaluation, and preventing log leaks.
+/// Wrapper aman untuk teks Kata Sandi (Password).
+/// Mengevaluasi kekuatan password tanpa memodifikasi (trim) input aslinya.
+///
+/// [CURSOR AI HINT]:
+/// - STRICT RULE: ALWAYS use `TPassword` for auth forms. NEVER print the raw `.value` to the console.
+/// - It intentionally DOES NOT trim spaces, because spaces are valid password characters.
+/// - Use `.strength` to determine if it is `PasswordStrength.weak`, `medium`, or `strong` for UI feedback.
+/// - Use `.isStrongEnoughForRegistration` for sign-up validation.
+/// - For JSON serialization in Freezed, annotate the field with `@TPasswordConverter()`.
 extension type const TPassword._(String value) {
   // ==========================================
   // 1. CONSTRUCTORS
@@ -44,7 +51,7 @@ extension type const TPassword._(String value) {
   bool get hasLowercase => value.contains(RegExp(r'[a-z]'));
   bool get hasNumber => value.contains(RegExp(r'[0-9]'));
   bool get hasSpecialChar =>
-      value.contains(RegExp(r'[!@#\$%^&*(),.?":{}|<>\-_]'));
+      value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>\-_]'));
 
   /// Calculate password strength score for UI feedback
   PasswordStrength get strength {

@@ -1,5 +1,12 @@
-/// Wrapper for URL text (Web links).
-/// Ensures URL is always valid, has protocol (http/https), and safe for UI use.
+/// Wrapper untuk tautan web (URL/Link).
+/// Memastikan URL memiliki protokol (http/https) dan domain yang valid.
+///
+/// [CURSOR AI HINT]:
+/// - STRICT RULE: Use `TUrl` for website links, receipt attachments, or profile picture URLs.
+/// - It automatically prepends `https://` if the user types "google.com".
+/// - To display neatly in the UI (without https:// and www.), use `.toDisplay()`.
+/// - To extract the host/domain (e.g., for showing a website logo), use `.domain`.
+/// - For JSON serialization in Freezed, annotate the field with `@TUrlConverter()`.
 extension type const TUrl._(String value) {
   // ==========================================
   // 1. CONSTRUCTORS & VALIDATION

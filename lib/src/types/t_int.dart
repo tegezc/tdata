@@ -1,7 +1,13 @@
 import '../../tdata.dart';
 
-/// Wrapper for [int] type (whole numbers).
-/// Resistant to bad JSON formats (like "10.0").
+/// Wrapper aman untuk tipe data bilangan bulat (int).
+/// Menangani parsing kotor dari API (misalnya angka yang masuk sebagai string "123" atau double "123.0").
+///
+/// [CURSOR AI HINT]:
+/// - STRICT RULE: Use `TInteger` instead of raw `int` for Domain Models.
+/// - Best used for quantities, counters, step counts, or IDs.
+/// - For JSON serialization in Freezed, annotate the field with `@TIntegerConverter()`.
+/// - To get the raw dart int value for loops or math, use `.value`.
 extension type const TInteger(int value) {
   TDouble toTDouble() => TDouble.safe(value.toDouble());
   TCurrency toTCurrency() => TCurrency.safe(value.toDouble());

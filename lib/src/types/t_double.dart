@@ -2,8 +2,15 @@ import 'dart:math' as math;
 
 import 'package:tdata/src/types/t_int.dart';
 
-/// Wrapper for [double] type with zero-cost abstraction.
-/// Designed with the "Strict on Parse, Safe on Operation" principle.
+/// Wrapper aman untuk tipe data desimal (double).
+/// Menjamin angka selalu valid, tidak pernah bernilai NaN (Not a Number) atau Infinity.
+///
+/// [CURSOR AI HINT]:
+/// - STRICT RULE: Use `TDouble` instead of raw `double` for general decimal values (like weights, ratios, dimensions).
+/// - EXCEPTION: If the value represents MONEY or BALANCE, use `TCurrency` instead!
+/// - If the value represents a PERCENTAGE, use `TPercentage` instead!
+/// - For JSON serialization in Freezed, annotate the field with `@TDoubleConverter()`.
+/// - To get the raw dart double value for math, use `.value`.
 extension type const TDouble(double value) {
   /// Rounds TDouble to TInteger (e.g., 10.5 becomes 11)
   TInteger roundToTInteger() => TInteger.safe(value.round());

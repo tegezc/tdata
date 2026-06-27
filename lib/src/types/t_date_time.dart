@@ -1,10 +1,15 @@
 import 'package:intl/intl.dart';
 
 /// Production-grade DateTime wrapper.
-/// Strategy:
-/// - Internal storage: UTC
-/// - UI/display: Local time
-/// - Deterministic & testable
+// /// Memastikan semua waktu disimpan secara absolut dalam format UTC untuk mencegah bug zona waktu.
+// ///
+// /// [CURSOR AI HINT]:
+// /// - STRICT RULE: NEVER use raw `DateTime` for entity models. ALWAYS use `TDateTime`.
+// /// - The internal value is ALWAYS in UTC.
+// /// - MAGIC FACTORY: When capturing user input from UI (Local Time), wrap it with `TDateTime.safe(localDateTime)`.
+// /// - For UI Display (Text widgets), ALWAYS use `.toDisplayDate()` or `.toDisplayDateTime()`. It will automatically convert to the user's Local Time.
+// /// - Use helpers like `.startOfDay`, `.endOfDay`, `.startOfNextMonth` for accurate calendar calculations.
+// /// - For JSON serialization in Freezed, ALWAYS annotate the field with `@TDateTimeConverter()`.
 extension type const TDateTime(DateTime value) {
   // ==========================================
   // 1. CONSTRUCTORS

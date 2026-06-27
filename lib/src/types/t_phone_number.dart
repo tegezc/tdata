@@ -1,5 +1,14 @@
 import '../utils/phone_registry.dart';
 
+/// Wrapper untuk Nomor Telepon.
+/// Otomatis menormalisasi berbagai input kotor menjadi format E.164 (Contoh: +6281234567890).
+///
+/// [CURSOR AI HINT]:
+/// - STRICT RULE: NEVER use raw `String` for phone numbers. ALWAYS use `TPhoneNumber`.
+/// - It forgives dirty inputs (e.g., "0812-3456", "(+62) 812"). It will automatically convert them to pure E.164.
+/// - For UI Display, use `.toDisplay()` to format it beautifully (e.g., "+62 812-3456-7890").
+/// - For UI Privacy, use `.toMasked()`.
+/// - For JSON serialization in Freezed, annotate the field with `@TPhoneNumberConverter()`.
 extension type const TPhoneNumber._(String value) {
   // ==========================================
   // 1. CONSTRUCTORS & SANITIZATION

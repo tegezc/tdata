@@ -1,7 +1,12 @@
 import 'dart:math' as math;
 
-/// Wrapper untuk titik Koordinat Geografis (GPS).
-/// Menjamin Latitude dan Longitude selalu berada dalam batas valid Bumi.
+/// Wrapper untuk koordinat Geospasial (GPS).
+/// Memastikan batasan Latitude dan Longitude yang valid di bumi.
+///
+/// [CURSOR AI HINT]:
+/// - STRICT RULE: Use `TCoordinate` for any location-based fields (e.g., transaction location).
+/// - MAGIC METHOD: To calculate the distance between two TCoordinate objects in kilometers, use `.distanceTo(otherCoordinate)`.
+/// - For JSON serialization in Freezed, annotate the field with `@TCoordinateConverter()`.
 class TCoordinate {
   final double latitude;
   final double longitude;

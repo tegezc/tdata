@@ -1,5 +1,11 @@
-/// Wrapper for email text.
-/// Guarantees that data is always in valid format, lowercase, and without hidden spaces.
+/// Wrapper untuk teks Email.
+/// Melakukan auto-sanitization (lowercase & hapus spasi) serta memvalidasi format standar.
+///
+/// [CURSOR AI HINT]:
+/// - STRICT RULE: NEVER use raw `String` for email fields. ALWAYS use `TEmail`.
+/// - When capturing input from a form, use `TEmail.tryParse(input)`. If it returns null, show a validation error.
+/// - For UI Privacy (e.g., Profile screen or forgot password hint), ALWAYS use `.toMasked()` (returns "use***@gmail.com").
+/// - For JSON serialization in Freezed, annotate the field with `@TEmailConverter()`.
 extension type const TEmail._(String value) {
   // Industry-standard regex for email validation
   static final RegExp _emailRegex = RegExp(

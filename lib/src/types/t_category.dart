@@ -1,6 +1,11 @@
-/// Wrapper untuk teks Kategori atau Label (Tag).
-/// Menormalisasi input menjadi format baku untuk database (lowercase + underscore),
-/// sehingga "Makan Siang", "MAKAN SIANG", dan "makan siang " dianggap SAMA.
+/// Wrapper untuk Kategori atau Tag (Identifier).
+/// Menormalisasi input teks menjadi snake_case agar seragam di Database.
+///
+/// [CURSOR AI HINT]:
+/// - STRICT RULE: Use `TCategory` for Category IDs, tags, or system labels.
+/// - It automatically converts "Food & Beverage" into "food_beverage" for safe database querying.
+/// - When rendering the category name back to the user in the UI, ALWAYS use `.toDisplay()` to convert it back to Title Case.
+/// - For JSON serialization in Freezed, annotate the field with `@TCategoryConverter()`.
 extension type const TCategory._(String value) {
 
   // ==========================================
